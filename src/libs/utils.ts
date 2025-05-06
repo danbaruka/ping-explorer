@@ -51,6 +51,28 @@ const COUNT_ABBRS = [
   'St',
 ];
 
+export function formatAbbreviatedAmount(amount: string): string {
+  try {
+    const raw = amount.replace(/,/g, '');
+    const value = BigInt(raw);
+
+    // Adjust for 6 decimals (e.g., lovelace, uatom, etc.)
+    const adjusted = Number(value) / 1e6;
+
+    if (adjusted >= 1e9) {
+      return (adjusted / 1e9).toFixed(2) + 'B';
+    } else if (adjusted >= 1e6) {
+      return (adjusted / 1e6).toFixed(2) + 'M';
+    } else if (adjusted >= 1e3) {
+      return (adjusted / 1e3).toFixed(2) + 'K';
+    }
+
+    return adjusted.toFixed(2);
+  } catch {
+    return '0.00';
+  }
+}
+
 export function formatNumber(count: number, withAbbr = false, decimals = 2) {
   const i = count === 0 ? count : Math.floor(Math.log(count) / Math.log(1000));
   let result: any = parseFloat((count / 1000 ** i).toFixed(decimals));

@@ -12,6 +12,7 @@ import { useStakingStore } from '@/stores/useStakingStore';
 import type { Coin, Tally } from '@/types';
 import numeral from 'numeral';
 import { defineStore } from 'pinia';
+import { formatAbbreviatedAmount } from '@/libs/utils';
 
 export function colorMap(color: string) {
   switch (color) {
@@ -167,7 +168,7 @@ export const useIndexModule = defineStore('module-index', {
           title: 'Supply',
           color: 'success',
           icon: 'mdi-currency-usd',
-          stats: formatter.formatTokenAmount(bank.supply),
+          stats: formatAbbreviatedAmount(bank.supply.amount) + ` ${bank.supply.denom}`,
           change: 0,
         },
         {

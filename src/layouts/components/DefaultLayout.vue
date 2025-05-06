@@ -83,7 +83,7 @@ dayjs()
         <RouterLink to="/" class="flex items-center">
           <img class="w-10 h-10" src="../../assets/logo.svg" />
           <h1 class="flex-1 ml-3 text-2xl font-semibold dark:text-white">
-            Ping.pub
+            Safro Explorer
           </h1>
         </RouterLink>
         <div
@@ -114,36 +114,7 @@ dayjs()
             class="cursor-pointer !h-10 block"
             @click="changeOpen(index)"
           />
-          <div
-            class="collapse-title !py-0 px-4 flex items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-[#373f59]"
-          >
-            <Icon
-              v-if="item?.icon?.icon"
-              :icon="item?.icon?.icon"
-              class="text-xl mr-2"
-              :class="{
-                'text-yellow-500': item?.title === 'Favorite',
-                'text-blue-500': item?.title !== 'Favorite',
-              }"
-            />
-            <img
-              v-if="item?.icon?.image"
-              :src="item?.icon?.image"
-              class="w-6 h-6 rounded-full mr-3"
-            />
-            <div
-              class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap"
-            >
-              {{ item?.title }}
-            </div>
-            <div
-              v-if="item?.badgeContent"
-              class="mr-6 badge badge-sm text-white border-none"
-              :class="item?.badgeClass"
-            >
-              {{ item?.badgeContent }}
-            </div>
-          </div>
+      
           <div class="collapse-content">            
             <div v-for="(el, key) of item?.children" class="menu bg-base-100 w-full !p-0">
               <RouterLink
@@ -183,9 +154,9 @@ dayjs()
               </RouterLink>
             </div>
             <div v-if="index === 0 && dashboard.networkType === NetworkType.Testnet" class="menu bg-base-100 w-full !p-0">
-              <RouterLink 
-              class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
-              :to="`/${blockchain.chainName}/faucet`">
+                <a 
+                class="hover:bg-gray-100 dark:hover:bg-[#373f59] rounded cursor-pointer px-3 py-2 flex items-center"
+                href="https://faucet.safrochain.com" target="_blank">
                 <Icon
                   icon="mdi:chevron-right"
                   class="mr-2 ml-3"
@@ -200,70 +171,12 @@ dayjs()
                 >
                   New
                 </div>
-              </RouterLink>
+                </a>
             </div>
           </div>
-        </div>
-
-        <RouterLink
-          v-if="isNavLink(item)"
-          :to="item?.to"
-          @click="sidebarShow = false"
-          class="cursor-pointer rounded-lg px-4 flex items-center py-2 hover:bg-gray-100 dark:hover:bg-[#373f59]"
-        >
-          <Icon
-            v-if="item?.icon?.icon"
-            :icon="item?.icon?.icon"
-            class="text-xl mr-2"
-            :class="{
-              'text-yellow-500': item?.title === 'Favorite',
-              'text-blue-500': item?.title !== 'Favorite',
-            }"
-          />
-          <img
-            v-if="item?.icon?.image"
-            :src="item?.icon?.image"
-            class="w-6 h-6 rounded-full mr-3 border border-blue-100"
-          />
-          <div
-            class="text-base capitalize flex-1 text-gray-700 dark:text-gray-200 whitespace-nowrap"
-          >
-            {{ item?.title }}
-          </div>
-          <div
-            v-if="item?.badgeContent"
-            class="badge badge-sm text-white border-none" 
-            :class="item?.badgeClass"
-          >
-            {{ item?.badgeContent }}
-          </div>
-        </RouterLink>
-        <div
-          v-if="isNavTitle(item)"
-          class="px-4 text-sm text-gray-400 pb-2 uppercase"
-        >
-          {{ item?.heading }}
         </div>
       </div>
       <div class="px-2">
-          <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
-            Tools
-          </div>
-          <RouterLink to="/wallet/suggest"
-          class="py-2 px-4 flex items-center cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-[#373f59]"
-          >
-            <Icon icon="mdi:frequently-asked-questions" class="text-xl mr-2" />
-            <div
-              class="text-base capitalize flex-1 text-gray-600 dark:text-gray-200"
-            >
-              Wallet Helper
-            </div>
-          </RouterLink>
-          <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">
-          {{ $t('module.sponsors') }}
-        </div>
-        <Sponsors />
-        <div class="px-4 text-sm pt-2 text-gray-400 pb-2 uppercase">{{ $t('module.links') }}</div>
         <a
           href="https://twitter.com/ping_pub"
           target="_blank"
